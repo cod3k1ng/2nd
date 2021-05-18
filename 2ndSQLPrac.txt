@@ -1,0 +1,230 @@
+Set Echo off
+Drop Table Item_Ordered;
+Drop Table Orders;
+Drop Table Product;
+Drop Table Customer;
+Drop Table Supplier;
+Drop Table Zip_Code;
+Set pagesize 50
+
+
+REM ***** Create and Load Customer Table *******
+Create Table Customer
+        (C_ID 	Char(5) 	Primary key,
+        C_Name 	VarChar(20),
+	  C_phone	Char(12), 
+        C_Zip 	Smallint);
+
+
+Insert into Customer Values
+('C-111', 'CGuo', '540.433.3052', 22801);
+Insert Into Customer Values
+('C-222', 'Rick Matheiu', '540.432.0091', 22872);
+Insert Into Customer Values
+('C-333', 'Diane Lending', '703.876.9901', 22801);
+Insert Into Customer Values
+('C-444', 'Tom Dillon', '804.568.6655', 27902);
+Insert Into Customer Values
+('C-555', 'Carey Cole', '555.774.8899', 22802);
+Insert Into Customer Values
+('C-666', 'Mike Mitri', '555.774.6641', 44557);
+Insert Into Customer Values
+('C-777', 'Harry Reif', '540.433.0313', 56422);
+Insert Into Customer Values
+('C-888', 'Young Choi', '703.799.6622', 22802);
+Insert Into Customer Values
+('C-999', 'Susan Palocsay', '840.774.9022', 22872);
+Insert Into Customer Values
+('C-000', 'Anne Pringle', '804.774.5533', 22802);
+
+REM ******** Create and Load Supplier Table ***************
+Create Table Supplier
+        (S_ID 	Char(5) 	Primary Key,
+        S_Name 	VarChar(20),
+        S_Zip 	Smallint);
+
+Insert Into Supplier Values
+('S-010', 'Hewlett Packard Ltd.', 76565);
+Insert Into Supplier Values
+('S-020', 'Sony', 76565);
+Insert Into Supplier Values
+('S-025', 'ALL Tell', 88321);
+Insert Into Supplier Values
+('S-030', 'Cannon', 88551);
+Insert Into Supplier Values
+('S-040', 'Memorex Ltd', 88551);
+Insert Into Supplier Values
+('S-050', 'Microsoft', 99541);
+Insert Into Supplier Values
+('S-060', 'Ultra', 88551);
+Insert Into Supplier Values
+('S-070', 'Seagate Ltd', 56421);
+Insert Into Supplier Values
+('S-075', 'SOYO', 57481);
+Insert Into Supplier Values
+('S-080', 'Adobe', 88551);
+Insert Into Supplier Values
+('S-090', 'Intel', 90051);
+
+REM ********Create and Load Orders Table ****************
+Create Table Orders
+        (O_ID 	Smallint 	Primary Key,
+        O_date 	Date,
+        C_ID 	Char(5) 	References Customer);
+
+Insert into Orders Values
+(1011, '20-Jan-2007', 'C-111');
+Insert into Orders Values
+(1012, '25-Jan-2007', 'C-111');
+Insert into Orders Values
+(1013, '30-Jan-2007', 'C-111');
+Insert into Orders Values
+(1014, '5-Feb-2007', 'C-111');
+Insert into Orders Values
+(1015, '19-Jan-2007', 'C-222');
+Insert into Orders Values
+(1016, '25-Jan-2007', 'C-222');
+Insert into Orders Values
+(1017, '13-Jan-2007', 'C-444');
+Insert into Orders Values
+(1018, '10-Feb-2007', 'C-666');
+Insert into Orders Values
+(1020, '21-Feb-2007', 'C-666');
+Insert into Orders Values
+(1021, '26-Feb-2007', 'C-666');
+Insert into Orders Values
+(1022, '25-Jan-2007', 'C-888');
+
+REM ************ Create and Load Product Table ***************
+REM ************ Create and Load Product Table ***************
+Create table Product
+(P_ID 	Char(5) 	Primary 	Key,
+P_Name 	VarChar(30),
+P_Class 	VarChar(12),
+P_Price 	Number(6,2),
+S_ID 	Char(5) 	References Supplier);
+
+Insert Into Product Values
+('H-001', 'Lazer Jet VI', 'Printer', 395.95, 'S-010');
+Insert Into Product Values
+('H-002', 'Ink Jet 3250', 'Printer', 125.00, 'S-010');
+Insert Into Product Values
+('H-003', 'Ink Jet 410A', 'Printer', 245.00, 'S-010');
+Insert Into Product Values
+('H-004', 'DVD-R 50 Pack', 'DVD', 42.50, 'S-010');
+Insert Into Product Values
+('H-005', 'DVD+R 50 Pack', 'DVD', 125.00, 'S-010');
+Insert Into Product Values
+('H-006', '19 LCD Monitor', NULL, 125.00, 'S-010');
+Insert Into Product Values
+ ('S-001', '150 GB Internal Drive', 'storage', 145.00, 'S-020');
+Insert Into Product Values
+('S-002', '250 GB Internal Drive', 'Storage', 220.00, 'S-020');
+Insert Into Product Values
+('S-003', '1GB Key Drive', 'Storage', 99.99, 'S-020');
+Insert Into Product Values
+('S-004', '19 Inch LCD Display', NULL, 299.00, 'S-020');
+Insert Into Product Values
+('S-005', 'DVD+R 25 Pack', 'Storage', 29.95, 'S-020');
+Insert Into Product Values
+('C-001', '250 Bubble Jet', 'Printer', 255.00, 'S-030');
+Insert Into Product Values
+('C-002', '4.1 MB Focal Point', 'Camera', 300.00, 'S-030');
+Insert Into Product Values
+('C-003', 'R77 6.0 MB Snapshot', 'Camera', 425.95, 'S-030');
+Insert Into Product Values
+('M-001', '24X DVD Burner', 'Storage', 215.00, 'S-040');
+Insert Into Product Values
+('M-002', 'Windows Vista', NULL, 195.99, 'S-050');
+Insert Into Product Values
+('M-003', 'Windows XP Professional', NULL, 389.00, 'S-050');
+Insert Into Product Values
+('M-004', 'Visual Studio 2005', 'Software', 395.00, 'S-050');
+Insert Into Product Values
+('M-005', 'Visio 2005', 'Software', 250.00, 'S-050');
+Insert Into Product Values
+('S-006', '145 GB Cheeta', 'storage', 1295, 'S-070');
+Insert Into Product Values
+('S-007', '130 GB External SCSI', 'Storage', 799.95, 'S-070');
+Insert Into Product Values
+('S-008', '300 GB Internal ATA', 'Storage', 329.95, 'S-070');
+Insert Into Product Values
+('S-009', '17 Inch Trinitron', 'Monitor', 129.95, 'S-070');
+Insert Into Product Values
+('I-001', '3.0 Ghz Celeron', 'Processor', 59.95, 'S-090');
+Insert Into Product Values
+('I-002', '3.4 Ghz P4', 'Processor', 229.95, 'S-090');
+Insert Into Product Values
+('I-003', 'Intel Pentium 4 531' , 'Processor', 129.95, 'S-090');
+
+
+Rem ************Create and load the Items Ordered Table**************
+Create table Item_Ordered
+(O_id	Smallint 	References Orders,
+        P_Id char(5) 	References Product,
+        Quantity Smallint,
+        Primary Key (O_id,P_Id));
+        
+Insert Into Item_ordered values
+(1011,  'H-001', 5);
+Insert Into Item_ordered values
+(1011,  'S-005', 3);
+Insert Into Item_ordered values
+(1011,  'I-001', 1);
+Insert Into Item_ordered values
+(1011,  'S-002', 1);
+Insert Into Item_ordered values
+(1012,  'H-001', 1);
+Insert Into Item_ordered values
+(1012,  'H-004', 1);
+Insert Into Item_ordered values
+(1012,  'M-001', 1);
+Insert Into Item_ordered values
+(1013,  'H-004', 2);
+Insert Into Item_ordered values
+(1014,  'H-004', 4);
+Insert Into Item_ordered values
+(1015,  'C-001', 5);
+Insert Into Item_ordered values
+(1015,  'S-008', 3);
+Insert Into Item_ordered values
+(1015,  'I-002', 10);
+Insert Into Item_ordered values
+(1015,  'H-006', 8);
+Insert Into Item_ordered values
+(1015,  'M-002', 10);
+Insert Into Item_ordered values
+(1015,  'M-005', 2);
+Insert Into Item_ordered values
+(1016,  'H-004', 2);
+Insert Into Item_ordered values
+(1017,  'H-004', 1);
+Insert Into Item_ordered values
+(1017,  'S-005', 1);
+Insert Into Item_ordered values
+(1018,  'I-001', 1);
+Insert Into Item_ordered values
+(1018,  'S-006', 1);
+Insert Into Item_ordered values
+(1020,  'H-001', 1);
+Insert Into Item_ordered values
+(1020,  'H-006', 1);
+Insert Into Item_ordered values
+(1020,  'S-002', 1);
+Insert Into Item_ordered values
+(1021,  'M-001', 1);
+Insert Into Item_ordered values
+(1022,  'H-004', 2);
+Insert Into Item_ordered values
+(1022,  'S-002', 1);
+Insert Into Item_ordered values
+(1022,  'S-003', 2);
+Insert Into Item_ordered values
+(1022,  'S-007', 2);
+Insert Into Item_ordered values
+(1022,  'M-003', 1);
+Insert Into Item_ordered values
+(1022,  'C-002', 2);
+
+Commit Work;
+
